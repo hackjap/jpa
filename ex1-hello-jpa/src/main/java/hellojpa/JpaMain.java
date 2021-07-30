@@ -16,13 +16,7 @@ public class JpaMain {
 
         try{
             // 영속
-            Member member = new Member();
-            member.setName("USER A");
 
-            System.out.println("=======================" );
-            em.persist(member);
-            System.out.println("member.getId() = " + member.getId());
-            System.out.println("=======================");
             tx.commit();
         }catch (Exception e){
             tx.rollback();
