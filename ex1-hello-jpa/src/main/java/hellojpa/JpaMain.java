@@ -1,12 +1,15 @@
 package hellojpa;
 
 import hellojpa.domain.Member;
+import hellojpa.domain.Order;
+import hellojpa.domain.OrderItem;
 import hellojpa.domain.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 
 public class JpaMain {
@@ -18,28 +21,28 @@ public class JpaMain {
         tx.begin();
 
         try{
-            // 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
 
-            Member member = new Member();
-            member.setUsername("member1");
-//          member.setTeamId(1L);
-            member.setTeam(team);
-            em.persist(member);
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             em.flush();
             em.clear();
 
-            Member findMember = em.find(Member.class, member.getId());
+
+        /*    Member findMember = em.find(Member.class, member.getId());
 
             Team findTeam = findMember.getTeam();
             System.out.println("findTeam.getName() = " + findTeam.getName());
 
             //
             Team newTeam = em.find(Team.class, 100L);
-            
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }*/
+
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
