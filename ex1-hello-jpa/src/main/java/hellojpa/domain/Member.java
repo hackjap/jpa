@@ -18,9 +18,17 @@ public class Member {
     private String street;
     private String zipcode;
 
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
-
+//
     public Long getId() {
         return id;
     }
