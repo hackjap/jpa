@@ -1,5 +1,8 @@
 JPA 정리
 https://www.notion.so/jsp98/JPA-76e8dd73f28d46f19943caec1ac39a4a
+vim plugin 설치
+
+
 
 ### H2 DB 모든 테이블 삭제
 drop all objects
