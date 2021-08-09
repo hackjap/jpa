@@ -24,4 +24,12 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    public void addStock(int count) {
+        this.stockQuantity += count;
+    }
+
+    public void removeStock(int count) {
+        this.stockQuantity -= count;
+    }
 }
