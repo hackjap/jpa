@@ -21,8 +21,13 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
+
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +41,10 @@ public class Order {
         this.member = member;
     }
 
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
     public Long getId() {
         return id;
     }
@@ -61,8 +70,4 @@ public class Order {
         this.status = status;
     }
 
-    public void addOrderItem(OrderItem orderItem) {
-        Order order = new Order();
-        order.addOrderItem(orderItem);
-    }
 }

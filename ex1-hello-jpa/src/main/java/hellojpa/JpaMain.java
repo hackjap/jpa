@@ -22,16 +22,7 @@ public class JpaMain {
 
         try{
 
-            Member member = new Member();
-            member.setName("member1");
 
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("team b");
-            team.getMembers().add(member);
-
-            em.persist(team);
 
             tx.commit();
         }catch (Exception e){
