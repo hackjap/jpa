@@ -1,9 +1,6 @@
 package hellojpa;
 
-import hellojpa.domain.Child;
-import hellojpa.domain.Member;
-import hellojpa.domain.Parent;
-import hellojpa.domain.Team;
+import hellojpa.domain.*;
 import hellojpa.domain.item.Book;
 import hellojpa.domain.item.Movie;
 
@@ -26,21 +23,12 @@ public class JpaMain {
 
         try{
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+            Member member = new Member();
+            member.setUsername("hello");
+            member.setHomeAddress(new Address("city","street","10"));
+            member.setWorkPeriod(new Period());
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            em.persist(parent);
-
-            em.flush();
-            em.clear();
-
-
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            em.persist(member);
 
             tx.commit();
 
