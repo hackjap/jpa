@@ -1,15 +1,14 @@
 package hellojpa;
 
 import hellojpa.domain.Member;
-import hellojpa.domain.Order;
-import hellojpa.domain.OrderItem;
-import hellojpa.domain.Team;
+import hellojpa.domain.item.Book;
+import hellojpa.domain.item.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
+import java.time.LocalDateTime;
 
 
 public class JpaMain {
@@ -22,6 +21,15 @@ public class JpaMain {
 
         try{
 
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
+
+            em.persist(book);
+
+
+            em.flush();
+            em.clear();
 
 
             tx.commit();
