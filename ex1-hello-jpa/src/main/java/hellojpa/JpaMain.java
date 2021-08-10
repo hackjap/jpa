@@ -1,6 +1,9 @@
 package hellojpa;
 
+import hellojpa.domain.Child;
 import hellojpa.domain.Member;
+import hellojpa.domain.Parent;
+import hellojpa.domain.Team;
 import hellojpa.domain.item.Book;
 import hellojpa.domain.item.Movie;
 
@@ -9,6 +12,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class JpaMain {
@@ -21,18 +26,24 @@ public class JpaMain {
 
         try{
 
-            Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("김영한");
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            em.persist(book);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
+            em.persist(parent);
 
             em.flush();
             em.clear();
 
 
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
+
             tx.commit();
+
         }catch (Exception e){
             tx.rollback();
         }finally {

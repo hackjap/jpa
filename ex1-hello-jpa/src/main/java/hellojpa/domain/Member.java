@@ -20,21 +20,20 @@ public class Member extends BaseEntity{
     private String zipcode;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
-
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")
-    private Locker locker;
-
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+    public Team getTeam() {
+        return team;
+    }
 
-
-
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Long getId() {
         return id;
@@ -83,4 +82,6 @@ public class Member extends BaseEntity{
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
 }
+
