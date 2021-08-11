@@ -8,9 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class JpaMain {
@@ -22,13 +19,21 @@ public class JpaMain {
         tx.begin();
 
         try{
+            Address address = new Address("city", "street", "10");
 
             Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("city","street","10"));
-            member.setWorkPeriod(new Period());
-
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
+
+            Address copyAddress = new Address(address.getCity(),address.getStreet(),address.getZipcode());
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setHomeAddress(address);
+            em.persist(member2);
+            // member.getHomeAddress().setCity("newCity");
+
 
             tx.commit();
 
@@ -41,3 +46,5 @@ public class JpaMain {
         emf.close();
     }
 }
+
+
